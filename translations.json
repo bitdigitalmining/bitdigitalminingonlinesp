@@ -1,0 +1,30 @@
+{
+  "en": {
+    "getStarted": "Get Started",
+    "financing": "Financing",
+    "days120": "120 days",
+    "days90": "90 days",
+    "days60": "60 days",
+    "yield": "yield",
+    "quotation": "Quotation",
+    "revenue": "Revenue",
+    "username": "Username",
+    "amount": "Amount",
+    "date": "Date",
+    "footer": "All Rights Reserved."
+  },
+  "es": {
+    "getStarted": "Comenzar",
+    "financing": "Financiación",
+    "days120": "120 días",
+    "days90": "90 días",
+    "days60": "60 días",
+    "yield": "rendimiento",
+    "quotation": "Cotización",
+    "revenue": "Ingresos",
+    "username": "Usuario",
+    "amount": "Cantidad",
+    "date": "Fecha",
+    "footer": "Todos los derechos reservados."
+  }
+}

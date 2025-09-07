@@ -6,7 +6,8 @@
 <title>Bit-Digital Mining Online</title>
 <link rel="stylesheet" href="style.css" />
 <style>
-  :root {
+  /* (your same CSS, unchanged) */
+    :root {
     --primary: #0d1b2a;   /* Dark blue */
     --secondary: #1b263b; /* Lighter blue */
     --accent: #00e5ff;    /* Neon cyan */
@@ -165,6 +166,7 @@
     width: 100%;
     table-layout: fixed;
   }
+
 </style>
 </head>
 <body>
@@ -181,30 +183,36 @@
   </div>
 </section>
 
-<a href="register.html" class="btn">Comenzar</a>
+<a href="register.html" class="btn" data-i18n="getStarted"></a>
 
 <!-- Financing -->
 <section class="financing">
-  <h2>Financiación</h2>
+  <h2 data-i18n="financing"></h2>
   <div class="financing-cards">
     <div class="financing-card">
-      <div class="financing-card-title"><img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span>120 días</span></div>
-      <div class="financing-card-yield">63.5%<br><span>Rendimiento</span></div>
+      <div class="financing-card-title">
+        <img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span data-i18n="days120"></span>
+      </div>
+      <div class="financing-card-yield">63.5%<br><span data-i18n="yield"></span></div>
     </div>
     <div class="financing-card">
-      <div class="financing-card-title"><img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span>90 días</span></div>
-      <div class="financing-card-yield">52.8%<br><span>Rendimiento</span></div>
+      <div class="financing-card-title">
+        <img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span data-i18n="days90"></span>
+      </div>
+      <div class="financing-card-yield">52.8%<br><span data-i18n="yield"></span></div>
     </div>
     <div class="financing-card">
-      <div class="financing-card-title"><img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span>60 días</span></div>
-      <div class="financing-card-yield">30.6%<br><span>Rendimiento</span></div>
+      <div class="financing-card-title">
+        <img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo">USDT <span data-i18n="days60"></span>
+      </div>
+      <div class="financing-card-yield">30.6%<br><span data-i18n="yield"></span></div>
     </div>
   </div>
 </section>
 
 <!-- Quotation -->
 <section class="quotation">
-  <h2>Cotización</h2>
+  <h2 data-i18n="quotation"></h2>
   <ul class="quotation-list">
     <li>
       <div class="coin-item"><img src="https://i.ibb.co/nsQFhNC1/IMG-9530.png" class="coin-icon"><span>BTC</span></div>
@@ -217,7 +225,7 @@
       <div class="coin-change positive">+3.2%</div>
     </li>
     <li>
-      <div class="coin-item"><img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-icon"><span>USDT</span></div>
+      <div class="coin-item"><img src="https://i.postimg.cc/JnKfKkHS/IMG-9529.png" class="coin-logo"><span>USDT</span></div>
       <div class="coin-price">$1.0007</div>
       <div class="coin-change positive">+0.05%</div>
     </li>
@@ -226,20 +234,30 @@
 
 <!-- Revenue -->
 <section class="revenue">
-  <h2 style="text-align:center;">Ingresos</h2>
+  <h2 style="text-align:center;" data-i18n="revenue"></h2>
   <div class="table-container">
     <table>
       <thead>
-        <tr><th>Nombre de usuario</th><th>Cantidad</th><th>Fecha</th></tr>
+        <tr>
+          <th data-i18n="username"></th>
+          <th data-i18n="amount"></th>
+          <th data-i18n="date"></th>
+        </tr>
       </thead>
       <tbody id="revenueTable"></tbody>
     </table>
   </div>
 </section>
 
-  <footer>
-    <p>© 2025 Bit-Digital Mining Online. Todos los derechos reservados.</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 Bit-Digital Mining Online. <span data-i18n="footer"></span></p>
+</footer>
+
+<!-- Language Switch Buttons -->
+<div style="text-align:center; margin:20px;">
+  <button onclick="setLanguage('en')">English</button>
+  <button onclick="setLanguage('es')">Español</button>
+</div>
 
 <script>
   // Slider
@@ -276,6 +294,32 @@
   }
   for (let i = 0; i < 8; i++) updateTable();
   setInterval(updateTable, 3000);
+
+  // i18n loader
+  let currentLang = "en";
+
+  function loadTranslations(lang) {
+    fetch("translations.json")
+      .then(response => response.json())
+      .then(data => {
+        const translations = data[lang];
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[key]) {
+            el.textContent = translations[key];
+          }
+        });
+      });
+  }
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    loadTranslations(lang);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadTranslations(currentLang);
+  });
 </script>
 
 </body>
